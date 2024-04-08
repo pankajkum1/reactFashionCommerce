@@ -7,8 +7,9 @@ import { getProducts } from '../../Redux/Product/actions';
 import { addCartItem } from '../../Redux/Cart/cartSlice';
 import { Link } from 'react-router-dom';
 import { addItemToProduct } from '../../Redux/Product/productSlice';
+import InfiniteScroll from "react-infinite-scroll-component";
 //variable destructuring of props
-const Products=({typeOfProducts,showProducts, changeMainComponentVariable,numberOfProducts})=>{
+const Products=({typeOfProducts,showProducts, changeMainComponentVariable,numberOfProducts, setNumberOfProducts})=>{
 
 if(typeOfProducts)
 {
@@ -40,6 +41,11 @@ if(showProducts)
     let cartData=useSelector(state=>state.cartReducer)
     console.log("component created:"+showProducts+":"+numberOfProducts);
     let dispatch= useDispatch();
+    function fetchData() {
+      setNumberOfProducts(numberOfProducts + 10)
+      console.log("get data call.....");
+      
+    }
     useEffect(()=>{
 
       //entry point for products component
@@ -92,8 +98,14 @@ if(showProducts)
     
     return(
  
-        <div className='product-container'>
-
+        <div className='product-container' id="scrollableDiv" style={{ height: 300, overflow: "auto" }}>
+          <InfiniteScroll
+            dataLength={numberOfProducts}
+            next={fetchData}
+            hasMore={true}
+            loader={<h4>Loading...</h4>}
+            scrollableTarget="scrollableDiv"
+          >
         <button onClick={()=>changeMainComponentVariable(40)}>Change main component variable</button>
 
 
@@ -105,8 +117,8 @@ return(
 <Link to="/productdetails" state={{product:eachProduct}} >
   
             <div className='product-image-container'>
-                  <img src={require('../../assets/images/shop/'+  eachProduct.product_img)}/> 
-                {/* <img src={eachProduct.product_img} /> */}
+                  {/* <img src={require('../../assets/images/shop/'+  eachProduct.product_img)}/>  */}
+                <img src={eachProduct.product_img} />
                  
                  <p> id is: {eachProduct.id}</p>
 
@@ -144,6 +156,7 @@ return(
           </div>)
    
        })}  
+       </InfiniteScroll>
         </div>
 
 
