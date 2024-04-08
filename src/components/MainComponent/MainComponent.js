@@ -49,7 +49,7 @@ function MainComponent() {
 
     </div>
     <div className='col-lg-10 col-md-9 col-sm-8'>
-    <Products typeOfProducts={"clothes"} numberOfProducts={numberOfProducts} setNumberOfProducts={setNumberOfProducts}    showProducts={showProducts} changeMainComponentVariable={setNewVar}  />
+    <Products typeOfProducts={"clothes"} numberOfProducts={numberOfProducts} setNumberOfProducts={setNumberOfProducts}   showProducts={showProducts} changeMainComponentVariable={setNewVar}  />
     </div>
     
 

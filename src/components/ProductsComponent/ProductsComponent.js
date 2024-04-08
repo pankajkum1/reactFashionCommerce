@@ -99,6 +99,7 @@ if(showProducts)
     return(
  
         <div className='product-container' id="scrollableDiv" style={{ height: 300, overflow: "auto" }}>
+          
           <InfiniteScroll
             dataLength={numberOfProducts}
             next={fetchData}
